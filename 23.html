@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例研究：生成式AI产品需求分析 - AI产品需求分析方法论</title>
+    <style>
+        :root {
+            --primary-color: #4CAF50; /* 青草绿 */
+            --secondary-color: #2196F3; /* 天空蓝 */
+            --accent-color: #FF9800; /* 活力橙 */
+            --light-color: #FFF9C4; /* 淡鹅黄 */
+            --background-color: #F5F5F5; /* 浅灰背景 */
+            --text-color: #333333;
+            --card-bg: #FFFFFF;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        main {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        section {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 8px solid var(--accent-color);
+        }
+        h2 {
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--light-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        h3 {
+            color: var(--primary-color);
+            margin: 20px 0 10px;
+        }
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        ul, ol {
+            padding-left: 25px;
+            margin-bottom: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        .svg-container {
+            text-align: center;
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f8fdf8;
+            border-radius: 10px;
+        }
+        .architecture-svg {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+        }
+        .key-point {
+            background-color: var(--light-color);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px dashed var(--accent-color);
+        }
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            color: #666;
+            font-size: 1.1rem;
+            border-top: 3px solid var(--primary-color);
+        }
+        .footer-text {
+            font-weight: bold;
+            color: var(--secondary-color);
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>案例研究：生成式AI产品需求分析</h1>
+        <p class="subtitle">提示工程与输出质量控制、内容安全与过滤需求、创造力与可控性平衡、算力成本优化需求</p>
+        <p>《AI产品需求分析方法论》课程第23讲</p>
+    </header>
+
+    <main>
+        <section id="introduction">
+            <h2>引言：生成式AI产品的核心挑战</h2>
+            <p>生成式AI产品（如大语言模型、文生图、代码生成等）在带来革命性体验的同时，也引入了独特的产品需求挑战。本案例研究将深入剖析四个关键维度，为AI产品经理提供系统性的需求分析方法。</p>
+            <div class="key-point">
+                <strong>核心洞察：</strong> 生成式AI的需求分析必须同时考虑“人机交互”、“内容质量”、“安全合规”与“商业可持续性”四个象限，任何一方的缺失都将导致产品失败。
+            </div>
+        </section>
+
+        <section id="prompt-engineering">
+            <h2>一、提示工程与输出质量控制需求</h2>
+            <p>提示工程是用户与AI模型交互的核心界面，其设计直接影响输出质量与用户体验。</p>
+            <h3>关键需求点：</h3>
+            <ul>
+                <li><strong>结构化输入引导：</strong> 提供模板、示例、参数滑块（如创造力水平、长度），降低用户表达门槛。</li>
+                <li><strong>上下文管理：</strong> 支持多轮对话、上下文记忆与编辑，确保生成连贯性。</li>
+                <li><strong>输出格式化：</strong> 要求模型以特定格式（JSON、Markdown、表格）输出，便于下游处理。</li>
+                <li><strong>质量评估与迭代：</strong> 内置“重试”、“微调”、“对比生成”功能，让用户参与质量控制闭环。</li>
+            </ul>
+
+            <div class="svg-container">
+                <svg class="architecture-svg" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="50" y="100" width="120" height="60" rx="10" fill="#4CAF50" opacity="0.8"/>
+                    <text x="110" y="135" text-anchor="middle" fill="white" font-weight="bold">用户输入</text>
+                    <polygon points="200,130 250,130 225,150" fill="#2196F3"/>
+                    <rect x="270" y="100" width="150" height="60" rx="10" fill="#2196F3" opacity="0.8"/>
+                    <text x="345" y="135" text-anchor="middle" fill="white" font-weight="bold">提示工程层</text>
+                    <polygon points="450,130 500,130 475,150" fill="#FF9800"/>
+                    <rect x="520" y="100" width="150" height="60" rx="10" fill="#FF9800" opacity="0.8"/>
+                    <text x="595" y="135" text-anchor="middle" fill="white" font-weight="bold">AI模型</text>
+                    <polygon points="700,130 750,130 725,150" fill="#8BC34A"/>
+                    <rect x="50" y="200" width="120" height="60" rx="10" fill="#8BC34A" opacity="0.8"/>
+                    <text x="110" y="235" text-anchor="middle" fill="white" font-weight="bold">质量控制</text>
+                    <line x1="110" y1="160" x2="110" y2="200" stroke="#666" stroke-dasharray="5,5"/>
+                    <text x="400" y="80" text-anchor="middle" fill="#333" font-size="18" font-weight="bold">提示工程与输出质量控制流程</text>
+                </svg>
+            </div>
+
+            <h3>需求分析表示例：</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>需求ID</th>
+                        <th>需求描述</th>
+                        <th>优先级</th>
+                        <th>验收标准</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>PR-01</td>
+                        <td>用户可保存和复用成功的提示词模板</td>
+                        <td>高</td>
+                        <td>模板库支持增删改查，使用次数>5次/周/用户</td>
+                    </tr>
+                    <tr>
+                        <td>PR-02</td>
+                        <td>系统应对长文本输出提供“分节”和“摘要”选项</td>
+                        <td>中</td>
+                        <td>输出可读性评分提升20%（用户调研）</td>
+                    </tr>
+                    <tr>
+                        <td>PR-03</td>
+                        <td>提供实时生成质量预估（如置信度提示）</td>
+                        <td>中</td>
+                        <td>预估准确率>85%，减少用户无效等待</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="safety-filtering">
+            <h2>二、内容安全与过滤需求</h2>
+            <p>生成式AI可能产生有害、偏见或不合规内容，必须建立多层次防御体系。</p>
+            <h3>安全需求分层模型：</h3>
+            <ol>
+                <li><strong>输入层过滤：</strong> 实时检测并拦截恶意、敏感提示词。</li>
+                <li><strong>模型层约束：</strong> 通过RLHF、安全微调使模型对齐伦理准则。</li>
+                <li><strong>输出层审查：</strong> 对生成内容进行多维度分类过滤（暴力、仇恨、色情等）。</li>
+                <li><strong>后处理与审计：</strong> 内容标签、用户举报机制、生成日志留存。</li>
+            </ol>
+            <div class="code-block">
+<pre>
+// 伪代码示例：多层次安全过滤管道
+class SafetyPipeline:
+    def __init__(self):
+        self.input_filter = KeywordFilter()
+        self.model_safety = SafetyFineTunedModel()
+        self.output_scanner = ContentClassifier()
+
+    def generate_safely(self, user_prompt):
+        if self.input_filter.is_blocked(user_prompt):
+            return {"error": "输入包含受限内容"}
+        
+        raw_output = self.model_safety.generate(user_prompt)
+        
+        safety_score = self.output_scanner.scan(raw_output)
+        if safety_score < SAFETY_THRESHOLD:
+            return {"error": "生成内容未通过安全审核"}
+        
+        return {"content": raw_output, "safety_score": safety_score}
+</pre>
+            </div>
+        </section>
+
+        <section id="creativity-control">
+            <h2>三、创造力与可控性的平衡需求</h2>
+            <p>用户既希望AI有“创意”，又要求输出“稳定可靠”。产品需提供精细的控制杠杆。</p>
+            <div class="svg-container">
+                <svg viewBox="0 0 600 250" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="100" y1="200" x2="500" y2="200" stroke="#333" stroke-width="3"/>
+                    <circle cx="150" cy="200" r="40" fill="#FF9800" opacity="0.7"/>
+                    <text x="150" y="205" text-anchor="middle" fill="white" font-weight="bold">高创造力</text>
+                    <text x="150" y="240" text-anchor="middle" fill="#333">(如诗歌创作)</text>
+                    
+                    <circle cx="300" cy="150" r="50" fill="#4CAF50" opacity="0.8"/>
+                    <text x="300" y="155" text-anchor="middle" fill="white" font-weight="bold">理想平衡点</text>
+                    <text x="300" y="190" text-anchor="middle" fill="#333">(产品目标)</text>
+                    
+                    <circle cx="450" cy="200" r="40" fill="#2196F3" opacity="0.7"/>
+                    <text x="450" y="205" text-anchor="middle" fill="white" font-weight="bold">高可控性</text>
+                    <text x="450" y="240" text-anchor="middle" fill="#333">(如数据生成)</text>
+                    
+                    <text x="300" y="50" text-anchor="middle" fill="#333" font-size="20" font-weight="bold">创造力与可控性平衡谱系</text>
+                    <line x1="300" y1="60" x2="300" y2="100" stroke="#333" stroke-dasharray="5,5"/>
+                </svg>
+            </div>
+            <h3>平衡策略需求：</h3>
+            <ul>
+                <li><strong>参数化控制：</strong> 提供“温度”、“Top-p”等参数的可视化调节器。</li>
+                <li><strong>场景预设：</strong> “创意写作”、“严谨分析”、“头脑风暴”等一键模式。</li>
+                <li><strong>种子锁定：</strong> 允许设置随机种子，确保结果可复现。</li>
+                <li><strong>风格迁移：</strong> 学习用户提供的样例风格，在创意中保持一致性。</li>
+            </ul>
+        </section>
+
+        <section id="cost-optimization">
+            <h2>四、算力成本优化需求</h2>
+            <p>生成式AI的推理成本高昂，需求分析必须包含成本约束与优化策略。</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>优化维度</th>
+                        <th>具体需求</th>
+                        <th>预期收益</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>模型层面</strong></td>
+                        <td>支持模型蒸馏、量化、动态选择轻量模型</td>
+                        <td>推理成本降低40-70%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>缓存层面</strong></td>
+                        <td>对常见、重复性查询结果进行缓存</td>
+                        <td>减少30%的重复计算</td>
+                    </tr>
+                    <tr>
+                        <td><strong>用户层面</strong></td>
+                        <td>提供“草稿模式”、“简化输出”等省流选项</td>
+                        <td>提升免费/低套餐用户满意度</td>
+                    </tr>
+                    <tr>
+                        <td><strong>系统层面</strong></td>
+                        <td>异步生成、请求队列、自动扩缩容</td>
+                        <td>基础设施成本优化25%</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="key-point">
+                <strong>产品决策三角：</strong> 在“生成质量”、“响应速度”、“算力成本”三者间进行权衡。产品需求文档应明确不同场景下的优先级排序。
+            </div>
+        </section>
+
+        <section id="conclusion">
+            <h2>总结：生成式AI需求分析框架</h2>
+            <p>成功的生成式AI产品需求分析，是一个持续迭代的系统工程。产品经理需要：</p>
+            <ol>
+                <li>将<strong>提示工程</strong>视为核心用户体验进行设计。</li>
+                <li>将<strong>安全与过滤</strong>作为不可妥协的底线需求。</li>
+                <li>在<strong>创造力与可控性</strong>的谱系上，为不同场景找到最佳平衡点。</li>
+                <li>将<strong>算力成本</strong>作为关键约束条件，驱动技术架构与产品策略的创新。</li>
+            </ol>
+            <p>最终，所有需求都应服务于一个目标：<em>构建既强大可靠又易于掌控、既富有创意又安全合规、既体验卓越又商业可持续的AI产品。</em></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>《AI产品需求分析方法论》课程案例研究</p>
+        <p class="footer-text">蓝海资料掘金营</p>
+        <p>探索产品蓝海，挖掘需求金矿</p>
+    </footer>
+</body>
+</html>

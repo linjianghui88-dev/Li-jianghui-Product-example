@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>未来趋势展望：自主智能体、具身智能、通用人工智能(AGI)的影响 - 《Agent智能体产品设计从入门到精通》</title>
+    <style>
+        :root {
+            --primary-color: #4CAF50; /* 青草绿 */
+            --secondary-color: #FF9800; /* 活力橙 */
+            --accent-color: #2196F3; /* 天空蓝 */
+            --light-color: #FFF9C4; /* 淡鹅黄 */
+            --dark-color: #333333;
+            --text-color: #2c3e50;
+            --bg-color: #f8fdf2;
+            --card-bg: #ffffff;
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            padding: 0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 200, 124, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(100, 200, 255, 0.1) 0%, transparent 20%);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+        }
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .chapter-title {
+            color: var(--secondary-color);
+            border-left: 6px solid var(--secondary-color);
+            padding-left: 20px;
+            margin: 40px 0 25px;
+            font-size: 2.2rem;
+        }
+        .section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            border-top: 8px solid var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+        }
+        h2 svg {
+            margin-right: 12px;
+            fill: currentColor;
+        }
+        h3 {
+            color: var(--accent-color);
+            margin: 25px 0 15px;
+            font-size: 1.4rem;
+        }
+        p {
+            margin-bottom: 18px;
+            font-size: 1.05rem;
+        }
+        ul, ol {
+            padding-left: 25px;
+            margin-bottom: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+            padding-left: 8px;
+        }
+        .highlight {
+            background-color: var(--light-color);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid var(--secondary-color);
+            margin: 25px 0;
+            font-weight: 500;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        th {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 16px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f0f7ff;
+        }
+        .svg-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        .architecture-svg {
+            width: 100%;
+            max-width: 900px;
+            height: auto;
+        }
+        .trend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .trend-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            border-top: 6px solid;
+            text-align: center;
+        }
+        .trend-card:nth-child(1) {
+            border-top-color: var(--primary-color);
+        }
+        .trend-card:nth-child(2) {
+            border-top-color: var(--secondary-color);
+        }
+        .trend-card:nth-child(3) {
+            border-top-color: var(--accent-color);
+        }
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        .icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            display: block;
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            background: linear-gradient(to right, var(--dark-color), #444);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 25px 0;
+            font-family: 'Consolas', monospace;
+        }
+        .keyword { color: #ff79c6; }
+        .function { color: #50fa7b; }
+        .string { color: #f1fa8c; }
+        .comment { color: #6272a4; }
+        @media (max-width: 768px) {
+            .container { padding: 15px; }
+            h1 { font-size: 2.2rem; }
+            .chapter-title { font-size: 1.8rem; }
+            .section { padding: 20px; }
+            .trend-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>未来趋势展望</h1>
+            <p class="subtitle">自主智能体、具身智能、通用人工智能(AGI)对Agent产品设计的深远影响</p>
+            <p>《Agent智能体产品设计从入门到精通》第29章</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="chapter-title">29、未来趋势展望：自主智能体、具身智能、通用人工智能(AGI)的影响</h1>
+
+        <div class="section">
+            <h2>
+                <svg width="32" height="32" viewBox="0 0 24 24">
+                    <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M7,9.5A1.5,1.5 0 0,1 8.5,8A1.5,1.5 0 0,1 10,9.5A1.5,1.5 0 0,1 8.5,11A1.5,1.5 0 0,1 7,9.5M16,16H8V14H16V16M15.5,11A1.5,1.5 0 0,1 14,9.5A1.5,1.5 0 0,1 15.5,8A1.5,1.5 0 0,1 17,9.5A1.5,1.5 0 0,1 15.5,11Z"/>
+                </svg>
+                引言：站在技术变革的十字路口
+            </h2>
+            <p>人工智能正从执行特定任务的“工具”，演变为具有自主性、交互性和通用性的“伙伴”。本章将深入探讨三大核心趋势——<strong>自主智能体(Autonomous Agents)</strong>、<strong>具身智能(Embodied AI)</strong>和<strong>通用人工智能(AGI)</strong>——它们将重新定义人机交互的范式，并为Agent产品设计师带来前所未有的机遇与挑战。</p>
+            <div class="highlight">
+                核心洞察：未来的Agent产品将不再是简单的任务执行者，而是能够理解复杂意图、在物理与数字世界间自由穿梭、并持续进化的“数字生命体”。产品设计的重心将从功能实现转向关系构建与价值对齐。
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>
+                <svg width="32" height="32" viewBox="0 0 24 24">
+                    <path d="M12,15C12.81,15 13.5,14.7 14.11,14.11C14.7,13.5 15,12.81 15,12C15,11.19 14.7,10.5 14.11,9.89C13.5,9.3 12.81,9 12,9C11.19,9 10.5,9.3 9.89,9.89C9.3,10.5 9,11.19 9,12C9,12.81 9.3,13.5 9.89,14.11C10.5,14.7 11.19,15 12,15M12,2C14.75,2 17.1,3 19.05,4.95C21,6.9 22,9.25 22,12V13.45C22,14.45 21.65,15.3 21,16C20.3,16.67 19.5,17 18.5,17C17.3,17 16.31,16.5 15.56,15.5C14.56,16.5 13.38,17 12,17C10.63,17 9.45,16.5 8.46,15.54C7.5,14.55 7,13.38 7,12C7,10.63 7.5,9.45 8.46,8.46C9.45,7.5 10.63,7 12,7C13.38,7 14.55,7.5 15.54,8.46C16.5,9.45 17,10.63 17,12V13.45C17,13.86 17.16,14.22 17.46,14.53C17.76,14.84 18.11,15 18.5,15C18.92,15 19.27,14.84 19.57,14.53C19.87,14.22 20,13.86 20,13.45V12C20,9.81 19.23,7.93 17.65,6.35C16.07,4.77 14.19,4 12,4C9.81,4 7.93,4.77 6.35,6.35C4.77,7.93 4,9.81 4,12C4,14.19 4.77,16.07 6.35,17.65C7.93,19.23 9.81,20 12,20H17V22H12C9.25,22 6.9,21 4.95,19.05C3,17.1 2,14.75 2,12C2,9.25 3,6.9 4.95,4.95C6.9,3 9.25,2 12,2Z"/>
+                </svg>
+                三大趋势深度解析
+            </h2>
+
+            <div class="trend-grid">
+                <div class="trend-card">
+                    <svg class="icon" viewBox="0 0 100 100">
+                        <circle cx="50" cy="30" r="15" fill="#4CAF50"/>
+                        <path d="M35,65 L65,65 L75,85 L25,85 Z" fill="#4CAF50" opacity="0.8"/>
+                        <circle cx="40" cy="50" r="5" fill="white"/>
+                        <circle cx="60" cy="50" r="5" fill="white"/>
+                        <path d="M45,60 Q50,65 55,60" stroke="white" stroke-width="3" fill="none"/>
+                    </svg>
+                    <h3 class="card-title">自主智能体 (Autonomous Agents)</h3>
+                    <p><strong>定义：</strong>能够在无人为干预的情况下，感知环境、制定目标、规划并执行复杂任务序列的AI系统。</p>
+                    <ul style="text-align: left; margin-top: 15px;">
+                        <li><strong>核心特征：</strong>目标驱动、长期规划、工具使用、自我反思与修正。</li>
+                        <li><strong>产品影响：</strong>从“命令-响应”到“目标-交付”的范式转变。</li>
+                        <li><strong>设计挑战：</strong>可解释性、安全护栏、价值对齐。</li>
+                    </ul>
+                </div>
+
+                <div class="trend-card">
+                    <svg class="icon" viewBox="0 0 100 100">
+                        <rect x="30" y="20" width="40" height="50" rx="5" fill="#FF9800"/>
+                        <circle cx="50" cy="25" r="8" fill="#333"/>
+                        <rect x="35" y="40" width="30" height="25" fill="#FFF9C4"/>
+                        <path d="M20,75 L80,75 L70,90 L30,90 Z" fill="#FF9800" opacity="0.8"/>
+                        <circle cx="40" cy="80" r="5" fill="#333"/>
+                        <circle cx="60" cy="80" r="5" fill="#333"/>
+                    </svg>
+                    <h3 class="card-title">具身智能 (Embodied AI)</h3>
+                    <p><strong>定义：</strong>拥有物理或虚拟“身体”，通过与环境的实时交互来学习和完成任务的AI。</p>
+                    <ul style="text-align: left; margin-top: 15px;">
+                        <li><strong>核心特征：</strong>多模态感知、物理交互、空间理解、因果推理。</li>
+                        <li><strong>产品影响：</strong>AI从数字世界走向物理世界（机器人）和3D虚拟世界（元宇宙）。</li>
+                        <li><strong>设计挑战：</strong>实时性、安全性、人机物理交互设计。</li>
+                    </ul>
+                </div>
+
+                <div class="trend-card">
+                    <svg class="icon" viewBox="0 0 100 100">
+                        <path d="M50,10 L80,40 L65,40 L65,80 L35,80 L35,40 L20,40 Z" fill="#2196F3"/>
+                        <circle cx="50" cy="25" r="10" fill="white"/>
+                        <circle cx="50" cy="50" r="8" fill="#FFF9C4"/>
+                        <circle cx="50" cy="70" r="6" fill="#FF9800"/>
+                    </svg>
+                    <h3 class="card-title">通用人工智能 (AGI)</h3>
+                    <p><strong>定义：</strong>在大多数认知任务上达到或超越人类水平的AI，具备理解、学习和应用知识到广泛领域的能力。</p>
+                    <ul style="text-align: left; margin-top: 15px;">
+                        <li><strong>核心特征：</strong>泛化能力、抽象思维、元认知、创造力。</li>
+                        <li><strong>产品影响：</strong>真正的“全能助手”，可能重塑所有行业和职业。</li>
+                        <li><strong>设计挑战：</strong>控制问题、伦理框架、社会整合。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>
+                <svg width="32" height="32" viewBox="0 0 24 24">
+                    <path d="M16.5,12C19,12 21,14 21,16.5C21,17.38 20.75,18.21 20.31,18.9L23.39,22L22,23.39L18.88,20.32C18.19,20.75 17.37,21 16.5,21C14,21 12,19 12,16.5C12,14 14,12 16.5,12M16.5,14A2.5,2.5 0 0,0 14,16.5A2.5,2.5 0 0,0 16.5,19A2.5,2.5 0 0,0 19,16.5A2.5,2.5 0 0,0 16.5,14M11,4C12.1,4 13,4.9 13,6C13,7.1 12.1,8 11,8C9.9,8 9,7.1 9,6C9,4.9 9.9,4 11,4M11,14C9.9,14 9,13.1 9,12C9,10.9 9.9,10 11,10C12.1,10 13,10.9 13,12C13,13.1 12.1,14 11,14M11,20C9.9,20 9,19.1 9,18C9,16.9 9.9,16 11,16C12.1,16 13,16.9 13,18C13,19.1 12.1,20 11,20M7,4C8.1,4 9,4.9 9,6C9,7.1 8.1,8 7,8C5.9,8 5,7.1 5,6C5,4.9 5.9,4 7,4M4,20C4,21.1 4.9,22 6,22H16C17.1,22 18,21.1 18,20V16H4V20Z"/>
+                </svg>
+                对Agent产品设计的影响矩阵
+            </h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>设计维度</th>
+                        <th>自主智能体影响</th>
+                        <th>具身智能影响</th>
+                        <th>AGI影响</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>交互范式</strong></td>
+                        <td>从对话式转向目标委托式。用户设定高级目标，Agent自主拆解执行。</td>
+                        <td>从图形界面(GUI)转向物理/空间交互。手势、动作、空间位置成为输入。</td>
+                        <td>从人机交互转向“人-智能体协作”。AI成为平等的创意伙伴。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>用户体验(UX)</strong></td>
+                        <td>需设计“信任建立”流程、状态可视化、中断与接管机制。</td>
+                        <td>需考虑物理反馈（力、触觉）、安全距离、空间认知负荷。</td>
+                        <td>需解决“黑箱”焦虑，设计透明化、可预测、可引导的交互。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>产品架构</strong></td>
+                        <td>需内置规划器、记忆模块、工具调用层、反思与评估循环。</td>
+                        <td>需集成传感器融合、运动控制、3D环境模型、实时决策引擎。</td>
+                        <td>需模块化、可扩展的核心，支持跨领域知识融合与持续学习。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>伦理与安全</strong></td>
+                        <td>目标扭曲防范、行动边界设定、价值对齐（Alignment）。</td>
+                        <td>物理伤害预防、隐私保护（如家庭机器人）、行为合规性。</td>
+                        <td>长期主义价值引导、权力与责任界定、防止恶意使用。</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>
+                <svg width="32" height="32" viewBox="0 0 24 24">
+                    <path d="M21,16.5C21,16.88 20.79,17.21 20.47,17.38L12.57,21.82C12.41,21.94 12.21,22 12,22C11.79,22 11.59,21.94 11.43,21.82L3.53,17.38C3.21,17.21 3,16.88 3,16.5V7.5C3,7.12 3.21,6.79 3.53,6.62L11.43,2.18C11.59,2.06 11.79,2 12,2C12.21,2 12.41,2.06 12.57,2.18L20.47,6.62C20.79,6.79 21,7.12 21,7.5V16.5M12,4.15L5,8.09V15.91L12,19.85L19,15.91V8.09L12,4.15M12,6C13.66,6 15,7.34 15,9C15,10.66 13.66,12 12,12C10.34,12 9,10.66 9,9C9,7.34 10.34,6 12,6M12,8C11.45,8 11,8.45 11,9C11,9.55 11.45,10 12,10C12.55,10 13,9.55 13,9C13,8.45 12.55,8 12,8Z"/>
+                </svg>
+                未来Agent系统架构展望
+            </h2>
+            <div class="svg-container">
+                <svg class="architecture-svg" viewBox="0 0 900 500">
+                    <!-- 背景 -->
+                    <rect width="900" height="500" fill="#f8fdf2" rx="10"/>
+                    
+                    <!-- 标题 -->
+                    <text x="450" y="40" text-anchor="middle" font-size="22" font-weight="bold" fill="#2c3e50">未来融合型Agent系统架构概览</text>
+                    
+                    <!-- 用户层 -->
+                    <rect x="50" y="70" width="800" height="60" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+                    <text x="450" y="105" text-anchor="middle" font-size="18" fill="#2c3e50">用户与目标 (自然语言/物理交互输入)</text>
+                    
+                    <!-- 箭头 -->
+                    <polyline points="450,130 450,160" fill="none" stroke="#4CAF50" stroke-width="2"/>
+                    <polygon points="445,160 450,170 455,160" fill="#4CAF50"/>
+                    
+                    <!-- 核心协调层 -->
+                    <rect x="350" y="170" width="200" height="80" rx="10" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+                    <text x="450" y="210" text-anchor="middle" font-size="16" fill="#2c3e50">AGI核心协调器</text>
+                    <text x="450" y="230" text-anchor="middle" font-size="14" fill="#666">(意图理解、任务规划、价值对齐)</text>
+                    
+                    <!-- 三大能力支柱 -->
+                    <!-- 自主智能体支柱 -->
+                    <rect x="100" y="270" width="200" height="100" rx="10" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+                    <text x="200" y="310" text-anchor="middle" font-size="16" fill="#2c3e50">自主智能体引擎</text>
+                    <text x="200" y="335" text-anchor="middle" font-size="12" fill="#666">规划 | 工具使用 | 反思</text>
+                    
+                    <!-- 连接线 -->
+                    <polyline points="350,210 300,270" fill="none" stroke="#2196F3" stroke-width="2" stroke-dasharray="5,5"/>
+                    <polyline points="550,210 600,270" fill="none" stroke="#4CAF50" stroke-width="2" stroke-dasharray="5,5"/>
+                    
+                    <!-- 具身智能支柱 -->
+                    <rect x="350" y="270" width="200" height="100" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+                    <text x="450" y="310" text-anchor="middle" font-size="16" fill="#2c3e50">具身交互接口</text>
+                    <text x="450" y="335" text-anchor="middle" font-size="12" fill="#666">传感器 | 执行器 | 空间模型</text>
+                    
+                    <!-- 数据与知识支柱 -->
+                    <rect x="600" y="270" width="200" height="100" rx="10" fill="#F3E5F5" stroke="#9C27B0" stroke-width="2"/>
+                    <text x="700" y="310" text-anchor="middle" font-size="16" fill="#2c3e50">世界模型与记忆</text>
+                    <text x="700" y="335" text-anchor="middle" font-size="12" fill="#666">跨领域知识 | 长期记忆</text>
+                    
+                    <!-- 连接线到世界模型 -->
+                    <polyline points="450,250 450,270" fill="none" stroke="#9C27B0" stroke-width="2" stroke-dasharray="5,5"/>
+                    
+                    <!-- 环境层 -->
+                    <rect x="50" y="400" width="800" height="60" rx="10" fill="#FFF9C4" stroke="#FF9800" stroke-width="2"/>
+                    <text x="450" y="435" text-anchor="middle" font-size="18" fill="#2c3e50">数字与物理融合环境 (输出与影响)</text>
+                    
+                    <!-- 从支柱到环境的箭头 -->
+                    <polyline points="200,370 200,400" fill="none" stroke="#2196F3" stroke-width="2"/>
+                    <polyline points="450,370 450,400" fill="none" stroke="#4CAF50" stroke-width="2"/>
+                    <polyline points="700,370 700,400" fill="none" stroke="#9C27B0" stroke-width="2"/>
+                </svg>
+            </div>
+            <p class="highlight">架构解读：未来的Agent系统将是一个以<strong>AGI核心协调器</strong>为大脑，整合<strong>自主决策</strong>、<strong>物理交互</strong>与<strong>世界知识</strong>三大支柱的融合体。它能在数字与物理世界间无缝操作，理解用户深层意图，并负责任地执行复杂长期任务。</p>
+        </div>
+
+        <div class="section">
+            <h2>
+                <svg width="32" height="32" viewBox="0 0 24 24">
+                    <path d="M12,2L1,21H23M12,6L19.53,19H4.47M11,10V14H13V10M11,16V18H13V16"/>
+                </svg>
+                给产品设计师的行动建议
+            </h2>
+            <ol>
+                <li><strong>拥抱复杂性思维：</strong>从设计线性流程转向设计复杂系统的“初始条件”和“互动规则”。</li>
+                <li><strong>掌握多模态设计：</strong>学习语音、手势、空间UI、力反馈等超越屏幕的交互设计语言。</li>
+                <li><strong>深入理解AI原理：</strong>了解大模型、强化学习、机器人学的基础知识，以便与工程师高效协作。</li>
+                <li><strong>将伦理设计前置：</strong>在产品定义阶段就纳入公平性、透明度、问责制和安全缓解措施。</li>
+                <li><strong>构建“可引导”的界面：</strong>设计让用户能够轻松纠正、调整和指导AI行为的交互通道。</li>
+                <li><strong>关注长期用户体验：</strong>思考AI作为“长期伙伴”如何与用户建立信任、共同成长。</li>
+            </ol>
+            <div class="code-block">
+                <pre><span class="comment">// 未来Agent产品设计原则伪代码示例</span>
+<span class="keyword">class</span> <span class="function">FutureAgentProductDesign</span> {
+    <span class="keyword">constructor</span>() {
+        <span class="keyword">this</span>.corePrinciples = [
+            <span class="string">"Human-in-the-loop & Human-on-the-loop"</span>,
+            <span class="string">"Proactive Transparency"</span>,
+            <span class="string">"Gradual Delegation of Autonomy"</span>,
+            <span class="string">"Fail-Safe & Graceful Degradation"</span>,
+            <span class="string">"Value Alignment by Design"</span>
+        ];
+    }
+
+    <span class="function">designWorkflow</span>() {
+        <span class="comment">// 1. 理解用户深层目标与上下文</span>
+        <span class="keyword">let</span> userGoal = <span class="function">understandDeepIntent</span>(userInput, context);
+
+        <span class="comment">// 2. 与用户协同规划任务</span>
+        <span class="keyword">let</span> plan = <span class="function">coCreatePlanWithUser</span>(userGoal, agentCapabilities);
+
+        <span class="comment">// 3. 执行并保持透明沟通</span>
+        <span class="keyword">while</span> (!plan.isComplete()) {
+            <span class="function">showProgress</span>(plan.currentStep, plan.nextSteps);
+            <span class="function">offerControlPoints</span>(user); <span class="comment">// 提供关键控制点</span>
+            <span class="function">executeStep</span>(plan.currentStep);
+            <span class="function">reflectAndAdapt</span>(); <span class="comment">// 自我反思与调整</span>
+        }
+
+        <span class="comment">// 4. 交付结果并寻求反馈</span>
+        <span class="function">deliverOutcome</span>(plan.result);
+        <span class="function">solicitFeedbackForLearning</span>(user);
+    }
+}</pre>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>
+                <svg width="32" height="32" viewBox="0 0 24 24">
+                    <path d="M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9Z"/>
+                </svg>
+                结语：成为塑造未来的设计师
+            </h2>
+            <p>自主智能体、具身智能和AGI并非遥不可及的未来。它们的技术种子已经萌芽，并正在快速生长。作为Agent产品设计师，我们正站在一个历史性的节点上。</p>
+            <p>我们的责任不仅是创造好用、易用的产品，更是要<strong>塑造这些强大智能体与人类社会互动的方式</strong>。通过深思熟虑的设计，我们可以引导技术向增进人类福祉、扩展人类能力、促进社会繁荣的方向发展。</p>
+            <p>未来已来，只是分布尚不均匀。让我们以专业、负责和充满想象力的设计，去迎接并定义这个激动人心的智能体时代。</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>蓝海资料掘金营</p>
+            <p>《Agent智能体产品设计从入门到精通》课程资料 © 2024</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《Agent智能体产品设计从入门到精通》课程目录</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            min-height: 100vh;
+            padding-bottom: 80px; /* 为footer留空间 */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 25px;
+            background: linear-gradient(90deg, #4CAF50, #2196F3);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(33, 150, 243, 0.2);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: 0;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .course-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+            font-weight: bold;
+        }
+
+        .directory-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .chapter-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 6px solid #FF9800;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-card:nth-child(2n) {
+            border-left-color: #4CAF50;
+        }
+
+        .chapter-card:nth-child(3n) {
+            border-left-color: #2196F3;
+        }
+
+        .chapter-card:nth-child(4n) {
+            border-left-color: #9C27B0;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .chapter-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #FF9800, #FF5722);
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 42px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(255, 152, 0, 0.3);
+        }
+
+        .chapter-card:nth-child(2n) .chapter-number {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+        }
+
+        .chapter-card:nth-child(3n) .chapter-number {
+            background: linear-gradient(135deg, #2196F3, #0D47A1);
+            box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+        }
+
+        .chapter-card:nth-child(4n) .chapter-number {
+            background: linear-gradient(135deg, #9C27B0, #6A1B9A);
+            box-shadow: 0 4px 8px rgba(156, 39, 176, 0.3);
+        }
+
+        .chapter-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #2C3E50;
+            line-height: 1.4;
+        }
+
+        .chapter-desc {
+            color: #555;
+            line-height: 1.6;
+            flex-grow: 1;
+            font-size: 0.95rem;
+        }
+
+        .chapter-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: linear-gradient(to right, #42A5F5, #478ED1);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s;
+            align-self: flex-start;
+            box-shadow: 0 4px 10px rgba(66, 165, 245, 0.3);
+        }
+
+        .chapter-link:hover {
+            background: linear-gradient(to right, #1E88E5, #1565C0);
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(30, 136, 229, 0.4);
+        }
+
+        .chapter-link i {
+            margin-left: 5px;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(90deg, #1565C0, #0D47A1);
+            color: white;
+            border-radius: 15px;
+            margin-top: 30px;
+            box-shadow: 0 -5px 20px rgba(13, 71, 161, 0.2);
+            font-size: 1.3rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .directory-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .course-stats {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-robot"></i> Agent智能体产品设计从入门到精通</h1>
+            <p>掌握智能体产品设计的核心方法论与实践技能，从理论到实战的完整学习路径</p>
+            <div class="course-stats">
+                <div class="stat"><i class="fas fa-book-open"></i> 30个核心章节</div>
+                <div class="stat"><i class="fas fa-clock"></i> 从入门到精通</div>
+                <div class="stat"><i class="fas fa-laptop-code"></i> 实战驱动学习</div>
+            </div>
+        </header>
+
+        <main>
+            <div class="directory-container">
+                <!-- 第1章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">01</div>
+                    <h2 class="chapter-title">Agent智能体概述：智能体的定义、发展历程、核心价值与应用场景。</h2>
+                    <p class="chapter-desc">了解智能体的基本概念、历史演变以及在当今AI领域的重要地位和广泛的应用可能性。</p>
+                    <a href="01.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第2章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">02</div>
+                    <h2 class="chapter-title">AI产品设计思维：与传统产品设计的差异、以智能体为中心的设计理念。</h2>
+                    <p class="chapter-desc">掌握AI时代特有的产品设计思维方式，理解如何围绕智能体构建用户体验。</p>
+                    <a href="02.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第3章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">03</div>
+                    <h2 class="chapter-title">智能体技术栈基础：大语言模型、知识库、工具调用、记忆机制、规划与推理。</h2>
+                    <p class="chapter-desc">学习构建智能体所需的核心技术组件及其相互作用原理。</p>
+                    <a href="03.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第4章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">04</div>
+                    <h2 class="chapter-title">用户需求分析与场景挖掘：如何识别适合Agent化的用户痛点与高频场景。</h2>
+                    <p class="chapter-desc">学会发现和评估哪些用户需求最适合用智能体来解决，找到产品切入点。</p>
+                    <a href="04.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第5章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">05</div>
+                    <h2 class="chapter-title">智能体角色与人格设计：定义智能体的身份、性格、语气与交互风格。</h2>
+                    <p class="chapter-desc">为你的智能体赋予独特的个性和角色定位，使其与用户建立更自然的情感连接。</p>
+                    <a href="05.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第6章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">06</div>
+                    <h2 class="chapter-title">智能体能力规划：核心功能、扩展功能、知识边界与能力边界的界定。</h2>
+                    <p class="chapter-desc">明确智能体能做什么、不能做什么，合理规划其能力范围和发展路径。</p>
+                    <a href="06.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第7章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">07</div>
+                    <h2 class="chapter-title">智能体工作流设计：任务分解、决策路径、多步骤复杂交互流程。</h2>
+                    <p class="chapter-desc">设计智能体处理复杂任务时的内部工作流程和外部交互路径。</p>
+                    <a href="07.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第8章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">08</div>
+                    <h2 class="chapter-title">对话设计原则：自然语言交互、上下文理解、意图识别与澄清。</h2>
+                    <p class="chapter-desc">掌握设计自然、流畅、高效的对话交互的核心原则和技巧。</p>
+                    <a href="08.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第9章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">09</div>
+                    <h2 class="chapter-title">提示工程基础：系统提示词、用户提示词、思维链、少样本学习设计。</h2>
+                    <p class="chapter-desc">学习如何通过精心设计的提示词引导智能体产生期望的行为和输出。</p>
+                    <a href="09.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第10章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">10</div>
+                    <h2 class="chapter-title">高级提示工程技术：ReAct、CoT、ToT等框架在智能体中的应用。</h2>
+                    <p class="chapter-desc">掌握前沿的提示工程框架，提升智能体的推理和问题解决能力。</p>
+                    <a href="10.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第11章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">11</div>
+                    <h2 class="chapter-title">工具调用设计：如何为智能体设计与集成外部API和工具。</h2>
+                    <p class="chapter-desc">扩展智能体能力边界，使其能够调用外部工具和API完成复杂任务。</p>
+                    <a href="11.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第12章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">12</div>
+                    <h2 class="chapter-title">记忆系统设计：短期记忆、长期记忆、用户画像记忆与向量数据库应用。</h2>
+                    <p class="chapter-desc">为智能体设计记忆系统，使其能够记住对话历史和用户偏好。</p>
+                    <a href="12.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第13章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">13</div>
+                    <h2 class="chapter-title">知识库构建与管理：文档处理、向量化、检索增强生成(RAG)设计。</h2>
+                    <p class="chapter-desc">构建和管理智能体的专属知识库，实现准确、可靠的信息检索和生成。</p>
+                    <a href="13.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第14章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">14</div>
+                    <h2 class="chapter-title">多智能体协作设计：智能体分工、通信协议、竞争与协作机制。</h2>
+                    <p class="chapter-desc">设计多个智能体协同工作的系统，实现复杂问题的分布式解决。</p>
+                    <a href="14.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第15章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">15</div>
+                    <h2 class="chapter-title">智能体评估体系：如何评估智能体的有效性、准确性与用户体验。</h2>
+                    <p class="chapter-desc">建立科学的评估体系，量化智能体的性能表现和用户满意度。</p>
+                    <a href="15.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第16章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">16</div>
+                    <h2 class="chapter-title">人机协作界面设计：聊天界面、仪表盘、可视化状态展示。</h2>
+                    <p class="chapter-desc">设计直观、易用的人机交互界面，让用户与智能体的协作更加顺畅。</p>
+                    <a href="16.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第17章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">17</div>
+                    <h2 class="chapter-title">错误处理与边界控制：失败场景设计、安全护栏、误导性回答预防。</h2>
+                    <p class="chapter-desc">设计健壮的错误处理机制和安全护栏，确保智能体行为的可靠性和安全性。</p>
+                    <a href="17.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第18章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">18</div>
+                    <h2 class="chapter-title">智能体个性化与自适应：如何让智能体学习并适应用户偏好。</h2>
+                    <p class="chapter-desc">使智能体能够根据用户行为和反馈进行个性化调整，提供定制化体验。</p>
+                    <a href="18.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第19章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">19</div>
+                    <h2 class="chapter-title">情感计算与共情设计：在交互中融入情感识别与响应。</h2>
+                    <p class="chapter-desc">让智能体能够识别用户情感并做出恰当的情感回应，提升交互温度。</p>
+                    <a href="19.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第20章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">20</div>
+                    <h2 class="chapter-title">智能体产品商业模式：常见的Agent产品盈利模式与市场策略。</h2>
+                    <p class="chapter-desc">探索智能体产品的商业化路径，了解可行的盈利模式和市场策略。</p>
+                    <a href="20.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第21章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">21</div>
+                    <h2 class="chapter-title">MVP设计与快速验证：构建智能体最小可行产品的步骤与方法。</h2>
+                    <p class="chapter-desc">学习如何快速构建智能体MVP，以最小成本验证产品假设和市场需求。</p>
+                    <a href="21.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第22章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">22</div>
+                    <h2 class="chapter-title">A/B测试与数据驱动迭代：如何通过数据优化智能体表现。</h2>
+                    <p class="chapter-desc">运用数据驱动的方法，通过A/B测试持续优化智能体的性能和用户体验。</p>
+                    <a href="22.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第23章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">23</div>
+                    <h2 class="chapter-title">伦理与负责任AI设计：偏见、公平性、透明度与可解释性。</h2>
+                    <p class="chapter-desc">在设计智能体时考虑伦理问题，确保其行为公平、透明且负责任。</p>
+                    <a href="23.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第24章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">24</div>
+                    <h2 class="chapter-title">隐私与安全设计：用户数据保护、对话安全、权限控制。</h2>
+                    <p class="chapter-desc">确保智能体产品在隐私和安全方面符合最高标准，保护用户数据。</p>
+                    <a href="24.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第25章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">25</div>
+                    <h2 class="chapter-title">智能体部署架构：云原生、边缘计算、混合部署方案。</h2>
+                    <p class="chapter-desc">了解智能体产品的不同部署架构选项及其优缺点，选择适合的方案。</p>
+                    <a href="25.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第26章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">26</div>
+                    <h2 class="chapter-title">成本控制与性能优化：Token消耗、响应延迟、计算资源管理。</h2>
+                    <p class="chapter-desc">在保证用户体验的同时，有效控制智能体运行成本并优化性能。</p>
+                    <a href="26.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第27章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">27</div>
+                    <h2 class="chapter-title">行业垂直智能体设计：客服、教育、医疗、金融等领域的特殊考量。</h2>
+                    <p class="chapter-desc">探索不同行业对智能体产品的特殊需求和技术挑战。</p>
+                    <a href="27.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第28章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">28</div>
+                    <h2 class="chapter-title">智能体产品项目管理：跨职能团队协作、敏捷开发流程。</h2>
+                    <p class="chapter-desc">管理智能体产品开发项目，协调跨职能团队高效协作。</p>
+                    <a href="28.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第29章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">29</div>
+                    <h2 class="chapter-title">未来趋势展望：自主智能体、具身智能、通用人工智能(AGI)的影响。</h2>
+                    <p class="chapter-desc">展望智能体技术的未来发展方向及其对社会的潜在影响。</p>
+                    <a href="29.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <!-- 第30章 -->
+                <div class="chapter-card">
+                    <div class="chapter-number">30</div>
+                    <h2 class="chapter-title">综合实战：从0到1设计并规划一个完整的智能体产品方案。</h2>
+                    <p class="chapter-desc">综合运用所学知识，完成一个完整的智能体产品从概念到方案的设计。</p>
+                    <a href="30.html" class="chapter-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            蓝海资料掘金营
+        </footer>
+    </div>
+</body>
+</html>

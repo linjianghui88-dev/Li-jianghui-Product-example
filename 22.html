@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例研究：计算机视觉产品需求分析 | AI产品需求分析方法论</title>
+    <style>
+        :root {
+            --primary-color: #4CAF50; /* 青草绿 */
+            --secondary-color: #FF9800; /* 活力橙 */
+            --accent-color: #2196F3; /* 天空蓝 */
+            --light-color: #FFF9C4; /* 淡鹅黄 */
+            --dark-color: #333333;
+            --text-color: #2c3e50;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+        }
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            border-left: 6px solid var(--secondary-color);
+        }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px dashed var(--light-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        h3 {
+            color: var(--accent-color);
+            margin: 15px 0 10px;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        ul, ol {
+            padding-left: 25px;
+            margin-bottom: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .highlight {
+            background-color: var(--light-color);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary-color);
+            margin: 20px 0;
+        }
+        .svg-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f0f7ff;
+            border-radius: 12px;
+        }
+        .architecture-svg {
+            width: 100%;
+            max-width: 900px;
+            height: auto;
+        }
+        .footnote {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 40px;
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            letter-spacing: 1px;
+        }
+        .tag {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        .code-block {
+            background: #2d3a4b;
+            color: #e6e6e6;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>案例研究：计算机视觉产品需求分析</h1>
+            <p class="subtitle">图像/视频数据需求、模型精度与速度权衡、边缘部署需求、标注流水线需求</p>
+            <p>《AI产品需求分析方法论》课程 · 第22讲</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section>
+            <h2>引言：计算机视觉产品的核心挑战</h2>
+            <p>计算机视觉（CV）产品是将AI模型应用于图像或视频数据，以完成识别、检测、分割、跟踪等任务的软硬件系统。其需求分析相较于通用软件更为复杂，涉及数据、算法、算力、部署等多维度的权衡。本案例将深入剖析四个关键需求领域。</p>
+            <div class="highlight">
+                <strong>核心目标：</strong> 在有限的资源（数据、算力、成本、时间）约束下，定义并实现一个满足用户核心场景、性能可靠且可商业化的CV产品。
+            </div>
+        </section>
+
+        <section>
+            <h2>一、图像/视频数据需求分析</h2>
+            <p>数据是CV模型的“燃料”，其质量、数量、多样性直接决定模型上限。</p>
+            <h3>1.1 关键分析维度</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>维度</th>
+                        <th>分析要点</th>
+                        <th>产品需求示例</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>数据规模</strong></td>
+                        <td>初始训练集最小可行量、持续增长需求、测试集/验证集比例</td>
+                        <td>目标检测模型至少需要10,000张标注图像启动</td>
+                    </tr>
+                    <tr>
+                        <td><strong>数据质量</strong></td>
+                        <td>分辨率、光照条件、遮挡程度、背景复杂度、拍摄角度</td>
+                        <td>工业质检要求图像分辨率不低于1920x1080，光照均匀</td>
+                    </tr>
+                    <tr>
+                        <td><strong>数据多样性</strong></td>
+                        <td>场景覆盖、目标类别分布、季节/天气变化、设备差异</td>
+                        <td>自动驾驶视觉系统需覆盖白天/夜晚、晴/雨/雪、城市/高速等场景</td>
+                    </tr>
+                    <tr>
+                        <td><strong>数据格式与频率</strong></td>
+                        <td>图像格式(JPEG, PNG)、视频编码(H.264, H.265)、帧率、实时流或批量处理</td>
+                        <td>实时视频分析要求支持RTSP流，帧率≥15fps</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>1.2 需求输出清单</h3>
+            <ul>
+                <li><strong>数据规格文档：</strong> 明确图像尺寸、格式、色彩空间、视频编码标准。</li>
+                <li><strong>数据采集计划：</strong> 定义采集设备、环境、数量、频率及责任人。</li>
+                <li><strong>数据隐私与合规要求：</strong> 明确脱敏规则（如人脸模糊）、数据存储与使用权限。</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>二、模型精度与速度的权衡</h2>
+            <p>这是CV产品需求的核心矛盾，需在“准”与“快”之间找到业务最优解。</p>
+            <div class="svg-container">
+                <svg class="architecture-svg" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#4CAF50;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <!-- 坐标轴 -->
+                    <line x1="50" y1="250" x2="750" y2="250" stroke="#333" stroke-width="2"/>
+                    <line x1="50" y1="250" x2="50" y2="50" stroke="#333" stroke-width="2"/>
+                    <text x="40" y="40" font-size="14" fill="#2196F3">精度↑</text>
+                    <text x="740" y="270" font-size="14" fill="#2196F3">速度/效率→</text>
+                    <!-- 权衡曲线 -->
+                    <path d="M 100,240 Q 300,150 500,120 Q 700,80 750,60" stroke="url(#grad1)" stroke-width="3" fill="none"/>
+                    <!-- 产品定位点 -->
+                    <circle cx="200" cy="180" r="10" fill="#2196F3"/>
+                    <text x="220" y="185" font-size="14" fill="#333">安防监控</text>
+                    <circle cx="400" cy="130" r="10" fill="#4CAF50"/>
+                    <text x="420" y="135" font-size="14" fill="#333">移动端APP</text>
+                    <circle cx="600" cy="90" r="10" fill="#FF9800"/>
+                    <text x="620" y="95" font-size="14" fill="#333">实时交互</text>
+                    <!-- 说明 -->
+                    <text x="400" y="290" font-size="16" fill="#2c3e50" text-anchor="middle">模型复杂度与性能的权衡曲线</text>
+                </svg>
+            </div>
+            <h3>决策影响因素</h3>
+            <ul>
+                <li><strong>业务场景容忍度：</strong> 医疗诊断要求高精度（>99%），可接受秒级延迟；内容审核则需平衡精度与吞吐量。</li>
+                <li><strong>硬件算力约束：</strong> 边缘设备（如摄像头）算力有限，常选择轻量级模型（如MobileNet, YOLO）。</li>
+                <li><strong>指标量化：</strong> 明确核心指标（如mAP, F1-score, 延迟P95， QPS）及达标阈值。</li>
+            </ul>
+            <div class="highlight">
+                <strong>产品策略：</strong> 采用“分级模型”策略。云端部署大模型保证高精度，边缘端部署小模型保证实时性，二者协同。
+            </div>
+        </section>
+
+        <section>
+            <h2>三、边缘部署需求分析</h2>
+            <p>为满足低延迟、数据隐私、网络离线等需求，CV模型常需部署在终端或近场设备。</p>
+            <h3>3.1 需求清单</h3>
+            <ol>
+                <li><strong>硬件规格：</strong> CPU/GPU/NPU算力、内存、存储空间、功耗限制。</li>
+                <li><strong>推理框架：</strong> 支持TensorRT, OpenVINO, CoreML, TFLite等。</li>
+                <li><strong>环境适应性：</strong> 宽温、防尘、抗震（工业、车载场景）。</li>
+                <li><strong>更新与维护：</strong> OTA升级机制、模型热更新、远程监控。</li>
+                <li><strong>成本约束：</strong> 单点硬件BOM成本、部署规模总成本。</li>
+            </ol>
+            <h3>3.2 典型边缘部署架构图</h3>
+            <div class="svg-container">
+                <svg class="architecture-svg" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="50" y="50" width="700" height="300" rx="10" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+                    <!-- 云 -->
+                    <rect x="300" y="80" width="200" height="60" rx="8" fill="#FFF9C4" stroke="#FF9800" stroke-width="2"/>
+                    <text x="400" y="115" text-anchor="middle" font-size="16" fill="#333">云端服务中心</text>
+                    <text x="400" y="135" text-anchor="middle" font-size="12" fill="#666">模型训练/版本管理</text>
+                    <!-- 边缘 -->
+                    <rect x="150" y="180" width="120" height="80" rx="8" fill="#C8E6C9" stroke="#4CAF50" stroke-width="2"/>
+                    <text x="210" y="215" text-anchor="middle" font-size="14" fill="#333">边缘服务器</text>
+                    <text x="210" y="235" text-anchor="middle" font-size="11" fill="#666">中等模型 · 区域分析</text>
+                    <!-- 终端 -->
+                    <rect x="450" y="180" width="100" height="60" rx="8" fill="#FFCCBC" stroke="#FF5722" stroke-width="2"/>
+                    <text x="500" y="210" text-anchor="middle" font-size="14" fill="#333">智能摄像头</text>
+                    <rect x="450" y="250" width="100" height="60" rx="8" fill="#FFCCBC" stroke="#FF5722" stroke-width="2"/>
+                    <text x="500" y="280" text-anchor="middle" font-size="14" fill="#333">工控机</text>
+                    <!-- 连接线 -->
+                    <line x1="400" y1="140" x2="210" y2="180" stroke="#666" stroke-width="2" stroke-dasharray="5,5"/>
+                    <line x1="400" y1="140" x2="500" y2="180" stroke="#666" stroke-width="2" stroke-dasharray="5,5"/>
+                    <line x1="210" y1="260" x2="500" y2="250" stroke="#666" stroke-width="1"/>
+                    <!-- 箭头 -->
+                    <polygon points="400,140 395,135 405,135" fill="#666"/>
+                    <!-- 标签 -->
+                    <text x="400" y="350" text-anchor="middle" font-size="16" fill="#2c3e50">“云-边-端”协同的CV产品部署架构</text>
+                </svg>
+            </div>
+        </section>
+
+        <section>
+            <h2>四、标注流水线需求分析</h2>
+            <p>高质量标注数据是模型精度的基石，需系统化设计标注流程与工具。</p>
+            <h3>4.1 流水线核心环节</h3>
+            <ol>
+                <li><strong>任务定义：</strong> 标注类型（框、点、多边形、语义分割）、属性标签体系、标注规范文档。</li>
+                <li><strong>工具选型/开发：</strong> 考虑效率（快捷键、自动预标注）、质量控制（多人标注、仲裁）。</li>
+                <li><strong>人员与管理：</strong> 标注员培训、任务分配、绩效与质量挂钩的计费模式。</li>
+                <li><strong>质量闭环：</strong> 抽样验收、badcase回流重标、标注一致性评估（Kappa系数）。</li>
+            </ol>
+            <h3>4.2 标注需求规格表示例 (JSON格式)</h3>
+            <div class="code-block">
+<pre>{
+  “project_name”: “街道行人检测V1.0”,
+  “annotation_type”: “bounding_box”,
+  “classes”: [
+    { “id”: 1, “name”: “pedestrian”, “color”: “#FF0000” },
+    { “id”: 2, “name”: “cyclist”, “color”: “#00FF00” },
+    { “id”: 3, “name”: “vehicle”, “color”: “#0000FF” }
+  ],
+  “quality_requirements”: {
+    “iou_threshold_for_acceptance”: 0.95,
+    “min_pixel_size_for_object”: 20,
+    “allow_occlusion_level”: [“none”, “partial”]
+  },
+  “output_format”: “COCO”,
+  “throughput_target”: “2000 images/person/day”
+}</pre>
+            </div>
+            <p><strong>关键成功因素：</strong> 将标注视为持续的生产过程，而非一次性项目。建立“模型迭代-新数据发现-标注-再训练”的飞轮。</p>
+        </section>
+
+        <section>
+            <h2>总结：CV产品需求分析检查表</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>模块</th>
+                        <th>是否明确</th>
+                        <th>关键问题</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>数据需求</td>
+                        <td>✅</td>
+                        <td>数据源、最小数据集、质量指标、合规性是否定义？</td>
+                    </tr>
+                    <tr>
+                        <td>模型性能</td>
+                        <td>✅</td>
+                        <td>精度与速度的量化目标及业务优先级是否达成一致？</td>
+                    </tr>
+                    <tr>
+                        <td>部署环境</td>
+                        <td>✅</td>
+                        <td>硬件限制、推理框架、更新方式、成本预算是否清晰？</td>
+                    </tr>
+                    <tr>
+                        <td>标注流水线</td>
+                        <td>✅</td>
+                        <td>标注工具、规范、人员、质量评估流程是否就绪？</td>
+                    </tr>
+                    <tr>
+                        <td>迭代规划</td>
+                        <td>✅</td>
+                        <td>V1.0 MVP范围、数据闭环设计、扩展路线图是否制定？</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="highlight">
+                <p><strong>方法论精髓：</strong> 计算机视觉产品需求分析是一个多维度的<strong>系统权衡</strong>过程。成功的产品经理必须深入技术细节，在数据、算法、算力、成本、用户体验之间找到最佳平衡点，并构建可持续迭代的数据闭环。</p>
+            </div>
+            <div style="margin-top:20px;">
+                <span class="tag">计算机视觉</span>
+                <span class="tag">需求分析</span>
+                <span class="tag">模型部署</span>
+                <span class="tag">数据标注</span>
+                <span class="tag">AI产品</span>
+                <span class="tag">边缘计算</span>
+            </div>
+        </section>
+
+        <p class="footnote">* 本案例基于典型工业界实践抽象总结，具体项目需根据实际场景调整。© 《AI产品需求分析方法论》课程组</p>
+    </main>
+
+    <footer>
+        蓝海资料掘金营
+    </footer>
+</body>
+</html>

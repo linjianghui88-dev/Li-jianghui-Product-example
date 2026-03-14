@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI产品的监控与运维需求 - 方法论课程</title>
+    <style>
+        :root {
+            --primary-color: #4A90E2; /* 天蓝 */
+            --secondary-color: #7ED321; /* 草绿 */
+            --accent-color: #F5A623; /* 橙黄 */
+            --light-color: #F8E71C; /* 明黄 */
+            --neutral-color: #50E3C2; /* 青绿 */
+            --text-dark: #333333;
+            --text-light: #666666;
+            --background-light: #F9F9F9;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #e6f7ff 0%, #f0ffe6 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(90deg, var(--primary-color), var(--neutral-color));
+            color: white;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            box-shadow: var(--card-shadow);
+        }
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        main {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+            border-top: 6px solid var(--primary-color);
+        }
+        .card:nth-child(2) { border-top-color: var(--secondary-color); }
+        .card:nth-child(3) { border-top-color: var(--accent-color); }
+        .card:nth-child(4) { border-top-color: var(--neutral-color); }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed var(--light-color);
+            font-size: 1.8rem;
+        }
+        h3 {
+            color: var(--text-light);
+            margin: 15px 0 10px;
+            font-size: 1.3rem;
+        }
+        ul, ol {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .svg-container {
+            text-align: center;
+            margin: 25px 0;
+            padding: 15px;
+            background-color: #fdfdfd;
+            border-radius: 12px;
+        }
+        .architecture-svg {
+            width: 100%;
+            height: auto;
+            max-width: 600px;
+        }
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            color: var(--text-light);
+            border-top: 2px solid var(--light-color);
+            font-size: 1.1rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        .highlight {
+            background-color: rgba(122, 211, 33, 0.15);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .key-point {
+            background: linear-gradient(90deg, rgba(122, 211, 33, 0.1) 0%, rgba(74, 144, 226, 0.1) 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>AI产品的监控与运维需求</h1>
+        <p class="subtitle">模型性能监控与漂移检测、日志与可观测性需求、自动化重训练与回滚机制、成本监控需求</p>
+        <p class="subtitle">《AI产品需求分析方法论》课程 · 第十七讲</p>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>一、模型性能监控与漂移检测</h2>
+            <p>AI模型上线后并非一劳永逸，其性能会随时间、数据变化而衰减。持续的监控与漂移检测是保障模型有效性的核心。</p>
+            
+            <h3>1. 核心监控指标</h3>
+            <table>
+                <thead>
+                    <tr><th>指标类型</th><th>具体指标</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>预测性能</td><td>准确率、精确率、召回率、F1、AUC</td><td>业务效果的直接体现</td></tr>
+                    <tr><td>数据分布</td><td>特征值分布、缺失率、异常值统计</td><td>输入数据的健康度</td></tr>
+                    <tr><td>预测分布</td><td>预测分数分布、分类比例</td><td>模型输出稳定性</td></tr>
+                    <tr><td>延迟与吞吐</td><td>P99延迟、QPS、错误率</td><td>服务可用性与效率</td></tr>
+                </tbody>
+            </table>
+
+            <h3>2. 漂移检测类型</h3>
+            <ul>
+                <li><span class="highlight">概念漂移</span>：数据与目标变量的关系发生变化（如用户偏好改变）。</li>
+                <li><span class="highlight">数据漂移</span>：输入数据的分布发生变化（如特征值范围偏移）。</li>
+                <li><span class="highlight">模型衰减</span>：模型性能随时间自然下降。</li>
+            </ul>
+
+            <div class="svg-container">
+                <svg class="architecture-svg" viewBox="0 0 500 250">
+                    <rect x="10" y="50" width="120" height="60" rx="5" fill="#4A90E2" stroke="#333" stroke-width="1"/>
+                    <text x="70" y="85" text-anchor="middle" fill="white" font-weight="bold">数据输入</text>
+                    <rect x="160" y="50" width="120" height="60" rx="5" fill="#7ED321" stroke="#333" stroke-width="1"/>
+                    <text x="220" y="85" text-anchor="middle" fill="white" font-weight="bold">模型推理</text>
+                    <rect x="310" y="50" width="120" height="60" rx="5" fill="#F5A623" stroke="#333" stroke-width="1"/>
+                    <text x="370" y="85" text-anchor="middle" fill="white" font-weight="bold">输出结果</text>
+                    <polygon points="130,80 160,80" fill="none" stroke="#333" stroke-width="2"/>
+                    <polygon points="280,80 310,80" fill="none" stroke="#333" stroke-width="2"/>
+                    <rect x="160" y="150" width="180" height="60" rx="5" fill="#50E3C2" stroke="#333" stroke-width="1"/>
+                    <text x="250" y="185" text-anchor="middle" fill="#333" font-weight="bold">监控与漂移检测系统</text>
+                    <line x1="250" y1="110" x2="250" y2="150" stroke="#333" stroke-width="2" stroke-dasharray="5,5"/>
+                    <line x1="70" y1="110" x2="70" y2="180" stroke="#333" stroke-width="1"/>
+                    <line x1="370" y1="110" x2="370" y2="180" stroke="#333" stroke-width="1"/>
+                    <text x="70" y="200" text-anchor="middle" fill="#666" font-size="12">数据分布监控</text>
+                    <text x="370" y="200" text-anchor="middle" fill="#666" font-size="12">性能指标监控</text>
+                </svg>
+                <p><em>模型服务与监控系统交互示意图</em></p>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>二、日志与可观测性需求</h2>
+            <p>完善的日志体系是AI系统可观测性的基石，用于问题诊断、行为分析和审计溯源。</p>
+            
+            <h3>1. 日志层级与内容</h3>
+            <ol>
+                <li><strong>系统层日志</strong>：资源使用率、服务健康状态、异常崩溃信息。</li>
+                <li><strong>应用层日志</strong>：API调用记录、请求/响应摘要、业务错误码。</li>
+                <li><strong>模型层日志</strong>：每次预测的输入特征（可脱敏）、输出结果、置信度、模型版本。</li>
+                <li><strong>业务层日志</strong>：关键业务动作、用户反馈（如标注正确与否）。</li>
+            </ol>
+
+            <h3>2. 可观测性三大支柱</h3>
+            <div class="key-point">
+                <p><strong>指标（Metrics）</strong>：聚合的数值，反映系统整体状态（如平均响应时间、每日调用量）。</p>
+                <p><strong>日志（Logs）</strong>：离散的事件记录，包含完整的上下文信息。</p>
+                <p><strong>追踪（Traces）</strong>：单个请求在分布式系统中的完整调用链路。</p>
+            </div>
+
+            <h3>3. 日志记录示例代码</h3>
+            <div class="code-block">
+<pre>import json
+import logging
+from datetime import datetime
+
+def log_model_prediction(model_version, request_id, features, prediction, latency):
+    """记录模型预测日志"""
+    log_entry = {
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "level": "INFO",
+        "service": "ai-model-service",
+        "request_id": request_id,
+        "model_version": model_version,
+        "features": features,  # 注意：实际生产中需脱敏或哈希处理
+        "prediction": prediction,
+        "latency_ms": round(latency * 1000, 2),
+        "environment": "production"
+    }
+    # 结构化日志，便于后续检索与分析
+    logging.info(json.dumps(log_entry))
+
+# 调用示例
+log_model_prediction(
+    model_version="v2.1.5",
+    request_id="req_abc123",
+    features={"age": 30, "income": 50000, "city": "BJ"},
+    prediction={"class": "premium", "score": 0.87},
+    latency=0.125
+)</pre>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>三、自动化重训练与回滚机制</h2>
+            <p>建立自动化的模型生命周期管理流水线，以应对模型性能下降或线上事故。</p>
+            
+            <h3>1. 自动化重训练触发条件</h3>
+            <ul>
+                <li>监控到<span class="highlight">性能指标</span>连续低于阈值（如AUC < 0.8持续3天）。</li>
+                <li>检测到显著的<span class="highlight">数据漂移</span>或<span class="highlight">概念漂移</span>。</li>
+                <li>定期<span class="highlight">计划任务</span>（如每周/每月使用新数据重训练）。</li>
+                <li>积累足够量的<span class="highlight">新标注数据</span>（如超过1万条）。</li>
+            </ul>
+
+            <h3>2. 自动化流水线关键阶段</h3>
+            <table>
+                <thead>
+                    <tr><th>阶段</th><th>活动</th><th>产出/判断</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>数据准备</td><td>新数据收集、清洗、标注、特征工程</td><td>训练/验证/测试数据集</td></tr>
+                    <tr><td>模型训练</td><td>多算法训练、超参调优、交叉验证</td><td>候选模型集</td></tr>
+                    <tr><td>评估验证</td><td>离线指标评估、A/B测试、业务规则校验</td><td>模型评估报告</td></tr>
+                    <tr><td>部署上线</td><td>金丝雀发布、影子模式、流量切换</td><td>新版本线上服务</td></tr>
+                </tbody>
+            </table>
+
+            <h3>3. 回滚机制设计</h3>
+            <ol>
+                <li><strong>快照保存</strong>：每次上线保留完整的模型二进制文件、代码及配置。</li>
+                <li><strong>健康检查</strong>：新模型上线后实时监控关键业务指标。</li>
+                <li><strong>自动回滚触发</strong>：当错误率骤升或核心指标暴跌时，自动切回上一稳定版本。</li>
+                <li><strong>手动回滚通道</strong>：提供运维控制台，支持一键回滚。</li>
+            </ol>
+        </section>
+
+        <section class="card">
+            <h2>四、成本监控需求</h2>
+            <p>AI模型的训练与推理消耗大量计算资源，成本监控是产品可持续运营的关键。</p>
+            
+            <h3>1. 主要成本构成</h3>
+            <ul>
+                <li><strong>计算成本</strong>：GPU/CPU实例费用（训练与推理）。</li>
+                <li><strong>存储成本</strong>：训练数据、模型文件、日志的存储费用。</li>
+                <li><strong>数据成本</strong>：数据采集、清洗、标注的人力与工具费用。</li>
+                <li><strong>第三方服务成本</strong>：调用的API、云平台AI服务费用。</li>
+            </ul>
+
+            <h3>2. 成本监控维度</h3>
+            <div class="svg-container">
+                <svg viewBox="0 0 500 220">
+                    <circle cx="100" cy="100" r="60" fill="#4A90E2" fill-opacity="0.7" stroke="#333" stroke-width="2"/>
+                    <text x="100" y="95" text-anchor="middle" fill="white" font-weight="bold" font-size="16">按资源</text>
+                    <text x="100" y="115" text-anchor="middle" fill="white" font-size="14">GPU/CPU/存储</text>
+                    <circle cx="250" cy="100" r="60" fill="#7ED321" fill-opacity="0.7" stroke="#333" stroke-width="2"/>
+                    <text x="250" y="95" text-anchor="middle" fill="white" font-weight="bold" font-size="16">按业务</text>
+                    <text x="250" y="115" text-anchor="middle" fill="white" font-size="14">产品线/模型/API</text>
+                    <circle cx="400" cy="100" r="60" fill="#F5A623" fill-opacity="0.7" stroke="#333" stroke-width="2"/>
+                    <text x="400" y="95" text-anchor="middle" fill="white" font-weight="bold" font-size="16">按时间</text>
+                    <text x="400" y="115" text-anchor="middle" fill="white" font-size="14">日/周/月/季度</text>
+                    <text x="250" y="200" text-anchor="middle" fill="#666" font-size="14">成本监控的核心维度</text>
+                </svg>
+            </div>
+
+            <h3>3. 成本优化策略</h3>
+            <ul>
+                <li><strong>资源弹性伸缩</strong>：根据流量自动扩缩容，避免资源闲置。</li>
+                <li><strong>模型优化</strong>：使用模型压缩、量化、蒸馏等技术降低推理成本。</li>
+                <li><strong>缓存策略</strong>：对高频重复查询的结果进行缓存。</li>
+                <li><strong>预算与告警</strong>：设置月度预算，超标时自动告警。</li>
+            </ul>
+
+            <div class="key-point">
+                <p><strong>核心原则</strong>：成本监控的目标不是一味削减开支，而是追求<strong>成本效益比（ROI）</strong>的最优化，确保每一分计算资源都产生最大的业务价值。</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        蓝海资料掘金营
+    </footer>
+</body>
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建AI产品需求文档(PRD)模板 | AI产品需求分析方法论</title>
+    <style>
+        :root {
+            --primary: #4CAF50; /* 活力绿 */
+            --secondary: #2196F3; /* 智慧蓝 */
+            --accent: #FF9800; /* 创意橙 */
+            --light: #FFF9C4; /* 柔和黄 */
+            --background: #F5F5F5; /* 浅灰背景 */
+            --text: #333333;
+            --card-bg: white;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        main {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        section {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 8px solid var(--accent);
+        }
+        h2 {
+            color: var(--secondary);
+            border-bottom: 3px solid var(--light);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        h3 {
+            color: var(--primary);
+            margin: 15px 0 10px;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        ul, ol {
+            padding-left: 25px;
+            margin-bottom: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: var(--light);
+            color: var(--text);
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        .code-block {
+            background-color: #f4f4f4;
+            border-left: 5px solid var(--secondary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+        .svg-container {
+            display: flex;
+            justify-content: center;
+            margin: 25px 0;
+        }
+        svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .highlight {
+            background-color: var(--light);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 25px;
+            color: #666;
+            font-size: 1.1rem;
+            border-top: 2px dashed var(--primary);
+        }
+        .note {
+            background-color: #E8F5E9;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary);
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>创建AI产品需求文档(PRD)模板</h1>
+        <p class="subtitle">AI-PRD的核心组成部分、与传统PRD的差异、实例详解</p>
+        <p>《AI产品需求分析方法论》第十三讲</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>一、AI-PRD的核心组成部分</h2>
+            <p>AI产品需求文档（AI-PRD）是定义AI驱动产品的蓝图。它超越了传统PRD，需要特别关注<span class="highlight">数据、算法、模型和伦理</span>等维度。</p>
+            
+            <h3>1.1 核心模块</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>模块</th>
+                        <th>核心内容</th>
+                        <th>关键问题</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>产品概述</strong></td>
+                        <td>愿景、目标、核心AI价值主张</td>
+                        <td>AI解决了什么传统方案无法解决的问题？</td>
+                    </tr>
+                    <tr>
+                        <td><strong>用户与场景</strong></td>
+                        <td>用户画像、AI交互场景、成功标准</td>
+                        <td>用户如何与AI功能互动？体验如何衡量？</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AI能力定义</strong></td>
+                        <td>模型类型、输入/输出、性能指标、反馈机制</td>
+                        <td>需要什么模型？准确率、延迟要求是多少？</td>
+                    </tr>
+                    <tr>
+                        <td><strong>数据策略</strong></td>
+                        <td>数据源、标注要求、预处理、隐私与合规</td>
+                        <td>训练数据从哪里来？如何保证质量与合规？</td>
+                    </tr>
+                    <tr>
+                        <td><strong>系统架构</strong></td>
+                        <td>AI服务集成、数据处理流水线、部署环境</td>
+                        <td>AI模块如何与现有系统交互？</td>
+                    </tr>
+                    <tr>
+                        <td><strong>评估与迭代</strong></td>
+                        <td>A/B测试方案、模型监控、迭代计划</td>
+                        <td>如何评估AI效果？如何持续优化？</td>
+                    </tr>
+                    <tr>
+                        <td><strong>伦理与风险</strong></td>
+                        <td>偏见检查、可解释性、故障预案</td>
+                        <td>如何确保AI公平、可信、可控？</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="svg-container">
+                <svg width="600" height="300" viewBox="0 0 600 300">
+                    <rect x="50" y="50" width="500" height="200" rx="10" fill="#E3F2FD" stroke="#2196F3" stroke-width="2"/>
+                    <text x="300" y="85" text-anchor="middle" font-size="18" font-weight="bold" fill="#1565C0">AI-PRD 核心架构图</text>
+                    
+                    <circle cx="150" cy="150" r="40" fill="#4CAF50" stroke="#2E7D32" stroke-width="2"/>
+                    <text x="150" y="155" text-anchor="middle" fill="white" font-size="14">数据</text>
+                    
+                    <circle cx="300" cy="150" r="40" fill="#2196F3" stroke="#0D47A1" stroke-width="2"/>
+                    <text x="300" y="155" text-anchor="middle" fill="white" font-size="14">模型</text>
+                    
+                    <circle cx="450" cy="150" r="40" fill="#FF9800" stroke="#EF6C00" stroke-width="2"/>
+                    <text x="450" y="155" text-anchor="middle" fill="white" font-size="14">应用</text>
+                    
+                    <line x1="190" y1="150" x2="260" y2="150" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                    <line x1="340" y1="150" x2="410" y2="150" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                    
+                    <text x="150" y="210" text-anchor="middle" font-size="12" fill="#333">数据策略</text>
+                    <text x="300" y="210" text-anchor="middle" font-size="12" fill="#333">AI能力定义</text>
+                    <text x="450" y="210" text-anchor="middle" font-size="12" fill="#333">用户体验</text>
+                    
+                    <defs>
+                        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+        </section>
+
+        <section>
+            <h2>二、AI-PRD与传统PRD的核心差异</h2>
+            <p>AI产品的特性决定了其PRD需要关注更多动态和不确定性的因素。</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>对比维度</th>
+                        <th>传统PRD</th>
+                        <th>AI-PRD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>需求确定性</strong></td>
+                        <td>功能需求相对明确、确定</td>
+                        <td>需求基于概率输出，存在不确定性</td>
+                    </tr>
+                    <tr>
+                        <td><strong>核心资产</strong></td>
+                        <td>代码逻辑、业务流程</td>
+                        <td><span class="highlight">数据、模型、算法</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>成功标准</strong></td>
+                        <td>功能完成度、性能、稳定性</td>
+                        <td>模型准确率、F1分数、用户体验指标</td>
+                    </tr>
+                    <tr>
+                        <td><strong>迭代方式</strong></td>
+                        <td>版本发布、功能更新</td>
+                        <td>模型再训练、数据飞轮、持续学习</td>
+                    </tr>
+                    <tr>
+                        <td><strong>风险关注点</strong></td>
+                        <td>系统漏洞、业务逻辑错误</td>
+                        <td>模型偏见、数据漂移、伦理问题</td>
+                    </tr>
+                    <tr>
+                        <td><strong>团队协作</strong></td>
+                        <td>产品、开发、测试</td>
+                        <td>产品、数据科学家、算法工程师、标注员</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="note">
+                <p><strong>关键洞察：</strong> AI-PRD不是一个静态文档，而是一个“活文档”，需要随着模型性能和数据变化而持续更新。它更像是一个<strong>实验计划</strong>和<strong>协作契约</strong>。</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>三、实例详解：智能写作助手PRD片段</h2>
+            <p>以下以一个“智能写作助手”的“文本润色”功能为例，展示AI-PRD的关键部分如何撰写。</p>
+
+            <h3>3.1 AI能力定义</h3>
+            <ul>
+                <li><strong>功能名称：</strong> 上下文感知文本润色</li>
+                <li><strong>模型类型：</strong> 微调后的生成式大语言模型（如GPT系列）</li>
+                <li><strong>输入：</strong> 用户原始文本（最大长度2000字符）、润色风格选项（正式、简洁、生动）</li>
+                <li><strong>输出：</strong> 润色后的文本 + 修改原因简述（可解释性）</li>
+                <li><strong>性能指标：</strong>
+                    <ol>
+                        <li>生成延迟：&lt; 3秒（P95）</li>
+                        <li>语法错误纠正率：&gt; 95%</li>
+                        <li>用户满意度评分（1-5星）：目标均值 &gt; 4.2</li>
+                    </ol>
+                </li>
+            </ul>
+
+            <h3>3.2 数据策略</h3>
+            <div class="code-block">
+<pre>
+<strong>数据收集与标注方案：</strong>
+1. 源数据：
+   - 公开高质量语料库（如维基百科、经典文学）。
+   - 用户匿名授权提供的写作片段（需明确同意）。
+2. 标注任务：
+   - 构建“原始-润色”配对数据。
+   - 标注维度：语法修正、用词优化、风格转换。
+3. 数据预处理：
+   - 去除个人信息。
+   - 文本标准化（编码、长度裁剪）。
+4. 合规性：
+   - 遵守GDPR/《个人信息保护法》。
+   - 提供用户数据删除接口。
+</pre>
+            </div>
+
+            <h3>3.3 系统架构示意图</h3>
+            <div class="svg-container">
+                <svg width="650" height="250" viewBox="0 0 650 250">
+                    <rect x="20" y="50" width="120" height="60" rx="5" fill="#FFF9C4" stroke="#FFB300"/>
+                    <text x="80" y="85" text-anchor="middle" font-size="14">用户界面</text>
+                    <text x="80" y="105" text-anchor="middle" font-size="12">(Web/App)</text>
+
+                    <rect x="180" y="50" width="120" height="60" rx="5" fill="#C8E6C9" stroke="#4CAF50"/>
+                    <text x="240" y="85" text-anchor="middle" font-size="14">API网关</text>
+                    <text x="240" y="105" text-anchor="middle" font-size="12">(请求路由)</text>
+
+                    <rect x="340" y="50" width="120" height="60" rx="5" fill="#BBDEFB" stroke="#2196F3"/>
+                    <text x="400" y="85" text-anchor="middle" font-size="14">AI推理服务</text>
+                    <text x="400" y="105" text-anchor="middle" font-size="12">(模型部署)</text>
+
+                    <rect x="500" y="50" width="120" height="60" rx="5" fill="#FFCCBC" stroke="#FF9800"/>
+                    <text x="560" y="85" text-anchor="middle" font-size="14">反馈数据库</text>
+                    <text x="560" y="105" text-anchor="middle" font-size="12">(用户评分)</text>
+
+                    <rect x="180" y="150" width="300" height="60" rx="5" fill="#E1BEE7" stroke="#7B1FA2"/>
+                    <text x="330" y="185" text-anchor="middle" font-size="14">模型训练与数据管理平台</text>
+                    <text x="330" y="205" text-anchor="middle" font-size="12">(持续迭代循环)</text>
+
+                    <line x1="140" y1="80" x2="180" y2="80" stroke="#333" stroke-width="2" marker-end="url(#arrow2)"/>
+                    <line x1="300" y1="80" x2="340" y2="80" stroke="#333" stroke-width="2" marker-end="url(#arrow2)"/>
+                    <line x1="460" y1="80" x2="500" y2="80" stroke="#333" stroke-width="2" marker-end="url(#arrow2)"/>
+                    <line x1="560" y1="110" x2="560" y2="150" stroke="#333" stroke-width="2" stroke-dasharray="5,5"/>
+                    <line x1="330" y1="110" x2="330" y2="150" stroke="#333" stroke-width="2" stroke-dasharray="5,5"/>
+
+                    <defs>
+                        <marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+
+            <h3>3.4 伦理与风险预案</h3>
+            <ul>
+                <li><strong>偏见防范：</strong> 定期使用多样性测试集评估模型输出是否存在性别、文化等偏见。</li>
+                <li><strong>可解释性：</strong> 必须提供“为何这样修改”的简要原因（如：“将被动语态改为主动语态以增强力度”）。</li>
+                <li><strong>故障降级：</strong> 若模型服务超时或失败，自动切换至基于规则的简单语法检查，并明确提示用户。</li>
+                <li><strong>内容安全：</strong> 输出层需经过内容安全过滤器，防止生成不当或有害内容。</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>四、AI-PRD编写最佳实践</h2>
+            <ol>
+                <li><strong>拥抱不确定性：</strong> 使用“目标性能范围”而非绝对指标，并定义明确的验收实验。</li>
+                <li><strong>数据先行：</strong> 在详细设计功能前，先评估数据的可获得性、质量和成本。</li>
+                <li><strong>定义“最小可行模型”（MVM）：</strong> 明确第一版模型需要达到的最基本效果，以便快速上线验证。</li>
+                <li><strong>建立反馈闭环：</strong> PRD中必须规划用户反馈如何收集并用于模型再训练。</li>
+                <li><strong>跨学科评审：</strong> 确保PRD经过产品、算法、工程、法务等多方评审。</li>
+                <li><strong>保持文档活性：</strong> 使用Confluence、Notion等工具，将PRD与实验日志、模型版本关联。</li>
+            </ol>
+            <div class="note">
+                <p><strong>总结：</strong> 一份优秀的AI-PRD，不仅是需求的说明书，更是<strong>技术可行性、数据策略、伦理考量和迭代计划</strong>的综合体现。它帮助团队在AI的“不确定性”中，找到一条通往“可靠产品”的清晰路径。</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2023 《AI产品需求分析方法论》课程 | 蓝海资料掘金营</p>
+        <p>探索AI产品蓝海，挖掘数据黄金价值</p>
+    </footer>
+</body>
+</html>
